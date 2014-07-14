@@ -1,37 +1,36 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KataPotter
 {
     public class PriceCalculator
     {
-        public const double BookPrice = 7.0;
+        private static readonly IDictionary<int, double> DiscountDictionary = new Dictionary<int, double>
+        {
+            {1, 0},
+            {2, 0.05},
+            {3, 0.10},
+            {4, 0.20},
+            {5, 0.25},
+        };
 
         public double Scan(params Book[] books)
         {
-            int count = books.Count();
-            double totalPrice = BookPrice * count;
+            var booksList = new List<Book>(books);
+            var lists = new List<IList<Book>>();
 
-            var discount = 0;
-
-            int distinctCount = books.Distinct().Count();
-
-            switch (distinctCount)
+            while (booksList.Any())
             {
-                case 2:
-                    discount = 5;
-                    break;
-                case 3:
-                    discount = 10;
-                    break;
-                case 4:
-                    discount = 20;
-                    break;
-                case 5:
-                    discount = 25;
-                    break;
+                var distinct = booksList.Distinct().ToList();
+
+                distinct.ForEach(x => booksList.Remove(x));
+
+                lists.Add(distinct);
             }
 
-            return totalPrice - (BookPrice * distinctCount * discount / 100);
+            var totalPrice = lists.Sum(x => x.Sum(y => y.Price)*(1 - (DiscountDictionary[x.Count()])));
+            return Math.Round(totalPrice, 2); 
         }
     }
 }
