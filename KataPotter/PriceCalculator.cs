@@ -6,7 +6,7 @@ namespace KataPotter
 {
     public class PriceCalculator
     {
-        private static readonly IDictionary<int, double> DiscountDictionary = new Dictionary<int, double>
+        public static readonly IDictionary<int, double> DiscountDictionary = new Dictionary<int, double>
         {
             {1, 0},
             {2, 0.05},
@@ -17,20 +17,9 @@ namespace KataPotter
 
         public double Scan(params Book[] books)
         {
-            var booksList = new List<Book>(books);
-            var lists = new List<IList<Book>>();
+            var distinctBooks = Books.DistinctBooks(books);
 
-            while (booksList.Any())
-            {
-                var distinct = booksList.Distinct().ToList();
-
-                distinct.ForEach(x => booksList.Remove(x));
-
-                lists.Add(distinct);
-            }
-
-            var totalPrice = lists.Sum(x => x.Sum(y => y.Price)*(1 - (DiscountDictionary[x.Count()])));
-            return Math.Round(totalPrice, 2); 
+            return Math.Round(distinctBooks.Sum(x => x.FinalPrice()), 2); 
         }
     }
 }
