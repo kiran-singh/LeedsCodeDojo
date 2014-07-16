@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 
@@ -65,7 +64,7 @@ namespace KataPotter.UnitTests
                 _book2,
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - (totalPrice * 5 / 100);
+            double expected = totalPrice - (totalPrice * 0.05);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());
@@ -106,7 +105,7 @@ namespace KataPotter.UnitTests
                 _book4,
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - (totalPrice * 20 / 100);
+            double expected = totalPrice - (totalPrice * 0.20);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());
@@ -128,7 +127,7 @@ namespace KataPotter.UnitTests
                 _book5,
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - (totalPrice * 25 / 100);
+            double expected = totalPrice - (totalPrice * 0.25);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());
@@ -148,7 +147,7 @@ namespace KataPotter.UnitTests
                 _book4,
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - ((_book1.Price + _book4.Price) * 5 / 100);
+            double expected = totalPrice - ((_book1.Price + _book4.Price) * 0.05);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());
@@ -169,7 +168,7 @@ namespace KataPotter.UnitTests
                 _book5
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - ((_book1.Price + _book2.Price + _book5.Price) * 10 / 100);
+            double expected = totalPrice - ((_book1.Price + _book2.Price + _book5.Price) * 0.10);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());
@@ -179,7 +178,7 @@ namespace KataPotter.UnitTests
         }
 
         [Test]
-        public void Scan_ThreePairsSameBooksFiveDifferentTypes_ReturnsPriceWithCorrectDiscount()
+        public void Scan_MultipleSetsOfDifferentTypes_ReturnsPriceWithMaxDiscount()
         {
             // Arrange
             var list = new List<Book>
@@ -189,12 +188,24 @@ namespace KataPotter.UnitTests
                 _book2,
                 _book2,
                 _book3,
+                _book3,
+                _book3,
+                _book3,
+                _book4,
+                _book4,
                 _book4,
                 _book4,
                 _book5,
+                _book5,
+                _book5,
             };
             double totalPrice = list.Sum(x => x.Price);
-            double expected = totalPrice - ((_book1.Price + _book2.Price + _book3.Price + _book4.Price + _book5.Price) * 25 / 100) - ((_book1.Price + _book2.Price + _book4.Price) * 10 / 100);
+            var twoFullSetBooksDiscount = (_book1.Price + _book2.Price + _book3.Price + _book4.Price + _book5.Price)*2*
+                                          0.25;
+            var oneThreeSetBooksDiscount = (_book3.Price + _book4.Price + _book5.Price)*0.10;
+            var oneTwoSetBooksDiscount = (_book3.Price + _book4.Price)*0.05;
+            double expected = totalPrice -
+                              (twoFullSetBooksDiscount + oneThreeSetBooksDiscount + oneTwoSetBooksDiscount);
 
             // Act
             var actual = _priceCalculator.Scan(list.ToArray());

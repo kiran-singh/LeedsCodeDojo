@@ -9,25 +9,9 @@ namespace KataPotter
         {
         }
 
-        public double FinalPrice()
+        public double FinalPrice(IDictionary<int, double> discountDictionary)
         {
-            return this.Sum(y => y.Price)*(1 - (PriceCalculator.DiscountDictionary[this.Count()]));
-        }
-
-        public static IList<Books> DistinctBooks(Book[] books)
-        {
-            var booksList = new List<Book>(books);
-            var distinctBooks = new List<Books>();
-
-            while (booksList.Any())
-            {
-                var distinct = booksList.Distinct().ToList();
-
-                distinct.ForEach(x => booksList.Remove(x));
-
-                distinctBooks.Add(new Books(distinct));
-            }
-            return distinctBooks;
+            return this.Sum(y => y.Price)*(1 - (discountDictionary[this.Count()]));
         }
     }
 }
