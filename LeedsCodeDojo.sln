@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataPotter", "KataPotter\KataPotter.csproj", "{0E7583ED-C68D-44CA-BDCB-80882A2962EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataPotter.UnitTests", "KataPotter.UnitTests\KataPotter.UnitTests.csproj", "{72733C8A-D5FD-45F7-AC8C-337DE7892A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipePacking", "PipePacking\PipePacking.csproj", "{23FA9640-C5F4-4042-82EA-11DC1F908FA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipePacking.UnitTests", "PipePacking.UnitTests\PipePacking.UnitTests.csproj", "{0C589431-059E-4CDE-8BF5-830ED8196297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{72733C8A-D5FD-45F7-AC8C-337DE7892A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72733C8A-D5FD-45F7-AC8C-337DE7892A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72733C8A-D5FD-45F7-AC8C-337DE7892A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23FA9640-C5F4-4042-82EA-11DC1F908FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FA9640-C5F4-4042-82EA-11DC1F908FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FA9640-C5F4-4042-82EA-11DC1F908FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FA9640-C5F4-4042-82EA-11DC1F908FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C589431-059E-4CDE-8BF5-830ED8196297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C589431-059E-4CDE-8BF5-830ED8196297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C589431-059E-4CDE-8BF5-830ED8196297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C589431-059E-4CDE-8BF5-830ED8196297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
